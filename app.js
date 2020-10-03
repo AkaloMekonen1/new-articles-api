@@ -26,17 +26,8 @@ app.use(express.urlencoded({
 //         next()
 //     })
 // })
-app.get('/', (req, res)=>{
-    res.status(200).json({
-        message: "Hello World 3"
-    })
-})
 
-app.post('/articles', (req, res)=>{
-    res.status(200).json({
-        message: req.body
-    })
-})
+//Routes
 
 app.use((req, res, next) =>{
    const error = new Error('Not Found')
