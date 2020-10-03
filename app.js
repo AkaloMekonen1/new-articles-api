@@ -5,10 +5,14 @@ const articleRoute = require('./api/routes/articles')
 const categoriesRoute = require('./api/routes/categories')
 const usersRoute = require('./api/routes/users')
 const mongoose = require('mongoose')
- mongoose.connect(`mongodb+srv://akalo:<AfqfJAHJ2QZkMkbL>@cluster0.mgtz8.mongodb.net/<dbname>?retryWrites=true&w=majority`, {
+
+ mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.mgtz8.mongodb.net/<dbname>?retryWrites=true&w=majority`, {
      useNewUrlParser: true,
      useUnifiedTopology: true
  })
+mongoose.connection.on('connected', ()=>{
+    console.log('MongoDB Connected')
+})
 app.use(morgan("dev"))
 
 app.use((req, res, next) =>{
