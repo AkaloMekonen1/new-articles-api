@@ -4,7 +4,7 @@ const { getAllCategories, postAllCategory, patchAllCategory, deleteAllCategory} 
 
 router.get('/', getAllCategories)
 router.post('/', postAllCategory)
-router.patch('/articleId', patchAllCategory)
-router.delete('/articleId', deleteAllCategory)
+router.patch('/:articleId', patchAllCategory)
+router.delete('/:articleId', deleteAllCategory)
 
 module.exports = router

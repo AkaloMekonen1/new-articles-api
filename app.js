@@ -24,7 +24,7 @@ app.use(express.urlencoded({
 //Routes
 app.use('/articles', articleRoute)
 app.use('/categories', categoriesRoute)
-app.use('/categories', usersRoute)
+app.use('/users', usersRoute)
 
 
 app.use((req, res, next) =>{
