@@ -1,6 +1,9 @@
 const express = require('express')
 const app = express()
 const morgan = require('morgan')
+const articleRoute = require('./api/routes/articles')
+const categoriesRoute = require('./api/routes/categories')
+const usersRoute = require('./api/routes/users')
 app.use(morgan("dev"))
 
 app.use((req, res, next) =>{
@@ -18,16 +21,11 @@ app.use(express.urlencoded({
     extended: false
 }))
 
-// app.use((req, res, next) =>{
-//     req.on('data', (chunk)=>{
-//         console.log(chunk.toString())
-//     })
-//     req.on('end', ()=>{
-//         next()
-//     })
-// })
-
 //Routes
+app.use('/articles', articleRoute)
+app.use('/categories', categoriesRoute)
+app.use('/categories', usersRoute)
+
 
 app.use((req, res, next) =>{
    const error = new Error('Not Found')
