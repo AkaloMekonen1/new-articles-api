@@ -1,5 +1,7 @@
 const express = require('express')
 const app = express()
+const morgan = require('morgan')
+app.use(morgan("dev"))
 
 app.use((req, res, next) =>{
     res.header("Access-Control-Allow-Origin", "*")
@@ -15,6 +17,8 @@ app.get('/', (req, res)=>{
         message: "Hello World 3"
     })
 })
+
+app.post('/article', (res, req)=>{})
 
 app.use((req, res, next) =>{
    const error = new Error('Not Found')
