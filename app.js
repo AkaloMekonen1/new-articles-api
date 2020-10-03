@@ -4,6 +4,11 @@ const morgan = require('morgan')
 const articleRoute = require('./api/routes/articles')
 const categoriesRoute = require('./api/routes/categories')
 const usersRoute = require('./api/routes/users')
+const mongoose = require('mongoose')
+ mongoose.connect(`mongodb+srv://akalo:<AfqfJAHJ2QZkMkbL>@cluster0.mgtz8.mongodb.net/<dbname>?retryWrites=true&w=majority`, {
+     useNewUrlParser: true,
+     useUnifiedTopology: true
+ })
 app.use(morgan("dev"))
 
 app.use((req, res, next) =>{
