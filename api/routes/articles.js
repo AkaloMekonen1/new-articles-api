@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
+const { getAllArticles, postAllArticles, patchAllArticles, deleteAllArticles} = require('../controllers/articles')
 
-router.get('/articles', (req, res) =>{
-    res.status(200).json({
-        message: 'Get All Articles'
-    })
-})
+router.get('/', getAllArticles)
+router.post('/', postAllArticles)
+router.patch('/:articleId', patchAllArticles)
+router.delete('/:articleId', deleteAllArticles)
 
-module.export = router
+module.exports = router
