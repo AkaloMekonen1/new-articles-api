@@ -14,6 +14,10 @@ app.use((req, res, next) =>{
 })
 
 app.use(express.json())
+app.use(express.urlencoded({
+    extended: false
+}))
+
 // app.use((req, res, next) =>{
 //     req.on('data', (chunk)=>{
 //         console.log(chunk.toString())
@@ -30,7 +34,7 @@ app.get('/', (req, res)=>{
 
 app.post('/articles', (req, res)=>{
     res.status(200).json({
-        message: req.body.message
+        message: req.body
     })
 })
 
