@@ -13,9 +13,12 @@ app.use((req, res, next) =>{
     next()
 })
 
-app.use((req, res) =>{
+app.use((req, res, next) =>{
     req.on('data', (chunk)=>{
         console.log(chunk.toString())
+    })
+    req.on('end', ()=>{
+        next()
     })
 })
 app.get('/', (req, res)=>{
