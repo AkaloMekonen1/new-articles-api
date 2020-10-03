@@ -18,7 +18,11 @@ app.get('/', (req, res)=>{
     })
 })
 
-app.post('/article', (res, req)=>{})
+app.post('/article', (res, req)=>{
+    res.status(200).json({
+        message: "Hello World POST"
+    })
+})
 
 app.use((req, res, next) =>{
    const error = new Error('Not Found')
