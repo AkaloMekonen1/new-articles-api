@@ -12,13 +12,19 @@ app.use((req, res, next) =>{
     }
     next()
 })
+
+app.use((req, res) =>{
+    req.on('data', (chunk)=>{
+        console.log(chunk.toString())
+    })
+})
 app.get('/', (req, res)=>{
     res.status(200).json({
         message: "Hello World 3"
     })
 })
 
-app.post('/article', (res, req)=>{
+app.post('/articles', (req, res)=>{
     res.status(200).json({
         message: "Hello World POST"
     })
