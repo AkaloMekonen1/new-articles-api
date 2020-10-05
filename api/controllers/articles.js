@@ -14,9 +14,9 @@ module.exports = {
             description,
             content
         })
-        res.status(200).json({
-            message: 'Create All Articles'
-        })
+        article.save().then(res.status(200).json({
+            message: 'Created Articles'
+        }))
     },
     patchAllArticles: (req, res) =>{
         const articleId = req.params.articleId 
