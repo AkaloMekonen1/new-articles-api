@@ -6,3 +6,5 @@ const articleSchema = mongoose.Schema({
     description: {type: String, required: true},
     content: {type: String, required: true}
 })
+
+module.exports = mongoose.model('Article', articleSchema)
