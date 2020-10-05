@@ -8,15 +8,17 @@ module.exports = {
     },
     postAllArticles : (req, res) =>{
         const { title, description, content } = req.body
-        const Article = new Article({
+        const article = new Article({
             _id: new mongoose.Types.ObjectId,
             title,
             description,
             content
         })
-        article.save().then(res.status(200).json({
-            message: 'Created Articles'
-        })).catch(error =>{
+        article.save().then(()=>{
+            res.status(200).json({
+                message: 'Created Articles'
+            })
+        }).catch(error =>{
             res.status(500).json({
                 error
             })
