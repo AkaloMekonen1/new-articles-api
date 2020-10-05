@@ -16,7 +16,11 @@ module.exports = {
         })
         article.save().then(res.status(200).json({
             message: 'Created Articles'
-        }))
+        })).catch(error =>{
+            res.status(500).json({
+                error
+            })
+        })
     },
     patchAllArticles: (req, res) =>{
         const articleId = req.params.articleId 
