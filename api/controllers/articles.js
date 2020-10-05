@@ -1,3 +1,5 @@
+const Article = require('../models/articles')
+
 module.exports = {
     getAllArticles: (req, res) =>{
         res.status(200).json({
