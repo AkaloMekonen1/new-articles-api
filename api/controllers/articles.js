@@ -1,4 +1,4 @@
-const Article = require('../models/articles').default
+const Article = require('../models/articles')
 const mongoose = require('mongoose')
 const { json } = require('express')
 module.exports = {
@@ -45,8 +45,14 @@ module.exports = {
     },
     patchAllArticles: (req, res) =>{
         const articleId = req.params.articleId 
-        res.status(200).json({
-            message: `Update Articles - ${articleId}`
+        Article.updateOne({_id: articleId}, req.body).then(()=>{
+            res.status(200).json({
+                message: "Article Updated"
+            })
+        }).catch(error=>{
+            res.status(500).json({
+                error
+            })
         })
     },
     deleteAllArticles: (req, res) =>{
