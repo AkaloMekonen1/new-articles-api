@@ -18,10 +18,11 @@ module.exports = {
 
         Category.findById(categoryId).then((category)=>{
             if(!category){
-                res.status(404).json({
+               return res.status(404).json({
                     message: "Category not found"
                 })
             }
+
             const article = new Article({
                 _id: new mongoose.Types.ObjectId,
                 title,
@@ -29,7 +30,9 @@ module.exports = {
                 content,
                 categoryId
             });
-            return article.save()
+
+            return article.save()  
+             
         }).then(()=>{
             res.status(200).json({
                 message: 'Created Articles'
