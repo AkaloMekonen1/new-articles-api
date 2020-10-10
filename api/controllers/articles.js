@@ -14,12 +14,13 @@ module.exports = {
         })
     },
     postAllArticles : (req, res) =>{
-        const { title, description, content } = req.body
+        const { title, description, content, categoryId } = req.body
         const article = new Article({
             _id: new mongoose.Types.ObjectId,
             title,
             description,
-            content
+            content,
+            categoryId
         })
         article.save().then(()=>{
             res.status(200).json({
