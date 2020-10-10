@@ -1,6 +1,6 @@
 const Article = require('../models/articles')
+const Category = require('../models/category')
 const mongoose = require('mongoose')
-const { json } = require('express')
 module.exports = {
     getAllArticles: (req, res) =>{
         Article.find().then((article)=>{
@@ -15,14 +15,22 @@ module.exports = {
     },
     postAllArticles : (req, res) =>{
         const { title, description, content, categoryId } = req.body
-        const article = new Article({
-            _id: new mongoose.Types.ObjectId,
-            title,
-            description,
-            content,
-            categoryId
-        })
-        article.save().then(()=>{
+
+        Category.findById(categoryId).then((category)=>{
+            if(!category){
+                res.status(404).json({
+                    message: "Category not found"
+                })
+            }
+            const article = new Article({
+                _id: new mongoose.Types.ObjectId,
+                title,
+                description,
+                content,
+                categoryId
+            });
+            return article.save()
+        }).then(()=>{
             res.status(200).json({
                 message: 'Created Articles'
             })
