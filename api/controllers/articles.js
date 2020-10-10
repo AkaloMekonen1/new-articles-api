@@ -2,8 +2,10 @@ const Article = require('../models/articles')
 const mongoose = require('mongoose')
 module.exports = {
     getAllArticles: (req, res) =>{
-        res.status(200).json({
-            message: 'Get All Articles'
+        Article.find().then(()=>{
+            res.status(200).json({
+                message: 'Get All Articles'
+            })
         })
     },
     postAllArticles : (req, res) =>{
