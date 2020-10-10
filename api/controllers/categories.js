@@ -32,16 +32,41 @@ module.exports = {
             })
         })
     },
+    getCategory: (req,res) =>{
+        const categoryId = req.params.categoryId 
+        Category.findById(categoryId).then(category =>{
+            res.status(200).json({
+                category
+            })
+        }).catch(error =>{
+            res.status(500).json({
+                error
+            })
+        })
+    },
     patchAllCategory: (req, res) =>{
-        const articleId = req.params.articleId 
-        res.status(200).json({
-            message: `Create All Category - ${articleId}`
+        const categoryId = req.params.categoryId 
+        Category.updateOne({_id: categoryId}, req.body).then(()=>{
+            res.status(200).json({
+                message: "Category Updated"
+            })
+        }).catch(error=>{
+            res.status(500).json({
+                error
+            })
         })
     },
     deleteAllCategory: (req, res) =>{
-        const articleId = req.params.articleId 
-        res.status(200).json({
-            message: `Delete All Category - ${articleId}`
+        
+        const categoryId = req.params.categoryId 
+        Category.deleteOne({_id:categoryId}).then(()=>{
+            res.status(200).json({
+                message: `Category Deleted`
+            })
+        }).catch(error=>{
+            res.status(500).json({
+                error
+            })
         })
     }
-}
+    }
