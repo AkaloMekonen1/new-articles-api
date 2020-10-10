@@ -3,7 +3,7 @@ const Category = require('../models/category')
 const mongoose = require('mongoose')
 module.exports = {
     getAllArticles: (req, res) =>{
-        Article.find().then((article)=>{
+        Article.find().populate('categoryId', 'title').then((article)=>{
             res.status(200).json({
                 article
             })
