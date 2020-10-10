@@ -1,10 +1,15 @@
 const Article = require('../models/articles')
 const mongoose = require('mongoose')
+const { json } = require('express')
 module.exports = {
     getAllArticles: (req, res) =>{
-        Article.find().then(()=>{
+        Article.find().then((article)=>{
             res.status(200).json({
-                message: 'Get All Articles'
+                article
+            })
+        }).catch(error =>{
+            res.status(500).json({
+                error
             })
         })
     },
