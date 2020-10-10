@@ -7,4 +7,4 @@ const categorySchema = mongoose.Schema({
     content: {type: String, required: true}
 })
 
-module.exports = mongoose.model('Category', articleSchema)
+module.exports = mongoose.model('Category', categorySchema)
