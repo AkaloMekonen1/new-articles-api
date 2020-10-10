@@ -57,8 +57,14 @@ module.exports = {
     },
     deleteAllArticles: (req, res) =>{
         const articleId = req.params.articleId 
-        res.status(200).json({
-            message: `Delete Articles - ${articleId}`
+        Article.deleteOne({_id:articleId}).then(()=>{
+            res.status(200).json({
+                message: `Article Deleted`
+            })
+        }).catch(error=>{
+            res.status(500).json({
+                error
+            })
         })
     }
 }
