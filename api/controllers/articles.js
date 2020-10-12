@@ -57,6 +57,7 @@ module.exports = {
     },
     patchAllArticles: (req, res) =>{
         const articleId = req.params.articleId 
+        const {categoryId} = req.body
         Article.updateOne({_id: articleId}, req.body).then(()=>{
             res.status(200).json({
                 message: "Article Updated"
