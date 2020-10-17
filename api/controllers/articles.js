@@ -65,35 +65,36 @@ module.exports = {
                     message: "Article not found"
                 })
             }
+        }).then(()=>{
+            if(categoryId){
+                return  Category.findById(categoryId).then((category)=>{
+                      if(!category){
+                         return res.status(404).json({
+                              message: "Category not found"
+                          })
+                      }
+                      return Article.updateOne({_id: articleId}, req.body)
+                  }).then(()=>{
+                      res.status(200).json({
+                          message: 'Article Updated'
+                      })
+                  }).catch(error =>{
+                      res.status(500).json({
+                          error
+                      })
+                  })
+              }
+              Article.updateOne({_id: articleId}, req.body).then(()=>{
+                  res.status(200).json({
+                      message: "Article Updated"
+                  })
+              }).catch(error=>{
+                  res.status(500).json({
+                      error
+                  })
+              })
         })
 
-        if(categoryId){
-          return  Category.findById(categoryId).then((category)=>{
-                if(!category){
-                   return res.status(404).json({
-                        message: "Category not found"
-                    })
-                }
-                return Article.updateOne({_id: articleId}, req.body)
-            }).then(()=>{
-                res.status(200).json({
-                    message: 'Article Updated'
-                })
-            }).catch(error =>{
-                res.status(500).json({
-                    error
-                })
-            })
-        }
-        Article.updateOne({_id: articleId}, req.body).then(()=>{
-            res.status(200).json({
-                message: "Article Updated"
-            })
-        }).catch(error=>{
-            res.status(500).json({
-                error
-            })
-        })
     },
     deleteAllArticles: (req, res) =>{
         const articleId = req.params.articleId 
