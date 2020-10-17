@@ -58,6 +58,15 @@ module.exports = {
     patchAllArticles: (req, res) =>{
         const articleId = req.params.articleId 
         const {categoryId} = req.body
+
+        Article.findById(articleId).then((article)=>{
+            if(!article){
+                return res.status(404).json({
+                    message: "Article not found"
+                })
+            }
+        })
+
         if(categoryId){
           return  Category.findById(categoryId).then((category)=>{
                 if(!category){
@@ -68,7 +77,7 @@ module.exports = {
                 return Article.updateOne({_id: articleId}, req.body)
             }).then(()=>{
                 res.status(200).json({
-                    message: 'Created Articles'
+                    message: 'Article Updated'
                 })
             }).catch(error =>{
                 res.status(500).json({
