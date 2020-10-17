@@ -4,7 +4,7 @@ const { getAllArticles, postAllArticles, patchAllArticles, deleteAllArticles, ge
 const upload = require('../middlewares/upload')
 
 router.get('/', getAllArticles)
-router.post('/', upload, postAllArticles)
+router.post('/', upload.single('image'), postAllArticles)
 router.get('/:articleId', getArticle)
 router.patch('/:articleId', patchAllArticles)
 router.delete('/:articleId', deleteAllArticles)

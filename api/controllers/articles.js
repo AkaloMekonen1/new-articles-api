@@ -14,6 +14,7 @@ module.exports = {
         })
     },
     postAllArticles : (req, res) =>{
+        console.log(req.file)
         const { title, description, content, categoryId } = req.body
 
         Category.findById(categoryId).then((category)=>{
