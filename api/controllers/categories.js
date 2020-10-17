@@ -46,26 +46,42 @@ module.exports = {
     },
     patchAllCategory: (req, res) =>{
         const categoryId = req.params.categoryId 
-        Category.updateOne({_id: categoryId}, req.body).then(()=>{
-            res.status(200).json({
-                message: "Category Updated"
-            })
-        }).catch(error=>{
-            res.status(500).json({
-                error
+        Category.findById(categoryId).then((category)=>{
+            if(!category){
+                return res.status(404).json({
+                    message: "Category not found"
+                })
+            }
+        }).then(()=>{
+            Category.updateOne({_id: categoryId}, req.body).then(()=>{
+                res.status(200).json({
+                    message: "Category Updated"
+                })
+            }).catch(error=>{
+                res.status(500).json({
+                    error
+                })
             })
         })
     },
     deleteAllCategory: (req, res) =>{
         
         const categoryId = req.params.categoryId 
-        Category.deleteOne({_id:categoryId}).then(()=>{
-            res.status(200).json({
-                message: `Category Deleted`
-            })
-        }).catch(error=>{
-            res.status(500).json({
-                error
+        Category.findById(categoryId).then((category)=>{
+            if(!category){
+                return res.status(404).json({
+                    message: "Category not found"
+                })
+            }
+        }).then(()=>{
+            Category.deleteOne({_id:categoryId}).then(()=>{
+                res.status(200).json({
+                    message: `Category Deleted`
+                })
+            }).catch(error=>{
+                res.status(500).json({
+                    error
+                })
             })
         })
     }
