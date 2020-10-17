@@ -98,13 +98,21 @@ module.exports = {
     },
     deleteAllArticles: (req, res) =>{
         const articleId = req.params.articleId 
-        Article.deleteOne({_id:articleId}).then(()=>{
-            res.status(200).json({
-                message: `Article Deleted`
-            })
-        }).catch(error=>{
-            res.status(500).json({
-                error
+        Article.findById(articleId).then((article)=>{
+            if(!article){
+                return res.status(404).json({
+                    message: "Article not found"
+                })
+            }
+        }).then(()=>{
+            Article.deleteOne({_id:articleId}).then(()=>{
+                res.status(200).json({
+                    message: `Article Deleted`
+                })
+            }).catch(error=>{
+                res.status(500).json({
+                    error
+                })
             })
         })
     }
